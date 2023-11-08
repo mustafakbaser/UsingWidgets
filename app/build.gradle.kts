@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "net.mustafabaser.usingwidgets"
-    compileSdk = 33
+    compileSdk = 34
 
     buildFeatures{
         viewBinding = true
