@@ -2,6 +2,7 @@ package net.mustafabaser.usingwidgets;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,8 +10,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
@@ -135,6 +139,38 @@ public class MainActivity extends AppCompatActivity {
             String ulke = binding.autoCompleteTextView.getText().toString();
             Log.e("Sonuç", "Ülke : " + ulke);
             Log.e("Sonuç", "Slider : " + binding.slider.getProgress());
+        });
+
+        binding.buttonToast.setOnClickListener(v -> {
+            Toast.makeText(this,"Merhaba", Toast.LENGTH_SHORT).show();
+        });
+
+        binding.buttonSnackbar.setOnClickListener(v1 -> {
+            Snackbar.make(v1, "Silmek istiyor musunuz?", Snackbar.LENGTH_SHORT)
+                    .setAction("EVET", v2 -> {
+                        Snackbar.make(v2, "Silindi", Snackbar.LENGTH_SHORT)
+                                .setBackgroundTint(Color.RED)
+                                .setTextColor(Color.WHITE)
+                                .show();
+                    })
+                    .setBackgroundTint (Color.WHITE)
+                    .setTextColor(Color.BLUE)
+                    .setActionTextColor(Color.RED)
+                    .show();
+        });
+
+        binding.buttonAlert.setOnClickListener(v -> {
+            new MaterialAlertDialogBuilder(this)
+                    .setTitle("Başlık")
+                    .setMessage("Mesaj")
+                    // Pozitif Button
+                    .setPositiveButton("Tamam", (d,i) -> {
+                        Toast.makeText(this,"Tamam seçildi!", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Iptal", (d,i) -> {
+                        Toast.makeText(this,"İptal seçildi!", Toast.LENGTH_SHORT).show();
+                    })
+                    .show();
         });
     }
 }
